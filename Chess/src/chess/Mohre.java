@@ -9,9 +9,10 @@ package chess;
  *
  * @author mahdiar
  */
-public class Mohre {
+public abstract class Mohre {
     
     private Position position;
     private Color color;
     private boolean isRemoved;
+    public abstract boolean isValidMove(Position p);
 }
