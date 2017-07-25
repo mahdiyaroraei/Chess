@@ -13,6 +13,13 @@ public class Player {
     private static Player whitePlayer;
     private static Player blackPlayer;
     
+    public Sarbaz[] sarbazHa = new Sarbaz[8];
+    public Fil[] fillHa = new Fil[2];
+    public Asb[] asbHa = new Asb[2];
+    public Shah shah = new Shah();
+    public Rokh[] rokhHa = new Rokh[2];
+    public Vazir vazir = new Vazir();
+    
     public static Player getWhitePlayer(){//check for white player
         if(whitePlayer== null){
             whitePlayer=new Player();
