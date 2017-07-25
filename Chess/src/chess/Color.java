@@ -9,9 +9,7 @@ package chess;
  *
  * @author mahdiar
  */
-public class Mohre {
-    
-    private Position position;
-    private Color color;
-    private boolean isRemoved;
+public enum Color {
+    BLACK,
+    WHITE
 }
