@@ -11,8 +11,8 @@ package chess;
  */
 public abstract class Mohre {
     
-    private Position position;
-    private Color color;
-    private boolean isRemoved;
+    protected Position position;
+    protected Color color;
+    protected boolean isRemoved;
     public abstract boolean isValidMove(Position p);
 }
