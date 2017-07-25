@@ -10,9 +10,10 @@ package chess;
  * @author mahdiar
  */
 public class Player {
+
     private static Player whitePlayer;
     private static Player blackPlayer;
-    
+
     public Sarbaz[] sarbazHa = new Sarbaz[8];
     public Fil[] filHa = new Fil[2];
     public Asb[] asbHa = new Asb[2];
@@ -62,9 +63,13 @@ public class Player {
             }
 
             if (isPlayerMohre) {
-                if (isPositionFillByFriends(p)){
-                    
-                }else{
+                if (!isPositionFillByFriends(p)) {
+                    Mohre enemyMohre = isPositionFillByEnemies(p);
+                    if (enemyMohre != null) {
+                        enemyMohre.isRemoved = true;
+                    }
+                    mohre.position = p;
+                } else {
                     throw new InvalidPositionException();
                 }
             } else {
@@ -76,38 +81,41 @@ public class Player {
             throw new InvalidPositionException();
         }
     }
-    
-    private boolean isPositionFillByEnemies(Position p) {
-        if (this == Player.get) {
-            
-        } 
-        for (Sarbaz sarbaz : sarbazHa) {
+
+    private Mohre isPositionFillByEnemies(Position p) {
+        Player enemyPlayer = null;
+        if (this == Player.getWhitePlayer()) {
+            enemyPlayer = Player.getBlackPlayer();
+        } else if (this == Player.getBlackPlayer()) {
+            enemyPlayer = Player.getWhitePlayer();
+        }
+        for (Sarbaz sarbaz : enemyPlayer.sarbazHa) {
             if (p.isEquals(sarbaz.position)) {
-                return true;
+                return sarbaz;
             }
         }
-        for (Fil fil : filHa) {
+        for (Fil fil : enemyPlayer.filHa) {
             if (p.isEquals(fil.position)) {
-                return true;
+                return fil;
             }
         }
-        if (p.isEquals(shah.position)) {
-                return true;
+        if (p.isEquals(enemyPlayer.shah.position)) {
+            return enemyPlayer.shah;
         }
-        for (Rokh rokh : rokhHa) {
+        for (Rokh rokh : enemyPlayer.rokhHa) {
             if (p.isEquals(rokh.position)) {
-                return true;
+                return rokh;
             }
         }
-        if (p.isEquals(vazir.position)) {
-                return true;
+        if (p.isEquals(enemyPlayer.vazir.position)) {
+            return enemyPlayer.vazir;
         }
-        for (Asb asb : asbHa) {
+        for (Asb asb : enemyPlayer.asbHa) {
             if (p.isEquals(asb.position)) {
-                return true;
+                return asb;
             }
         }
-        return false;
+        return null;
     }
 
     private boolean isPositionFillByFriends(Position p) {
@@ -122,7 +130,7 @@ public class Player {
             }
         }
         if (p.isEquals(shah.position)) {
-                return true;
+            return true;
         }
         for (Rokh rokh : rokhHa) {
             if (p.isEquals(rokh.position)) {
@@ -130,7 +138,7 @@ public class Player {
             }
         }
         if (p.isEquals(vazir.position)) {
-                return true;
+            return true;
         }
         for (Asb asb : asbHa) {
             if (p.isEquals(asb.position)) {
@@ -139,19 +147,18 @@ public class Player {
         }
         return false;
     }
-        
-    public static Player getWhitePlayer(){//check for white player
-        if(whitePlayer== null){
-            whitePlayer=new Player();
-            return whitePlayer;
+
+    public static Player getWhitePlayer() {//check for white player
+        if (whitePlayer == null) {
+            whitePlayer = new Player();
         }
-        else return whitePlayer;
+        return whitePlayer;
     }
-    public static Player getBlackPlayer(){//check for black player
-        if(blackPlayer== null){
-            blackPlayer=new Player();
-            return blackPlayer;
+
+    public static Player getBlackPlayer() {//check for black player
+        if (blackPlayer == null) {
+            blackPlayer = new Player();
         }
-        else return blackPlayer;
+        return blackPlayer;
     }
 }
