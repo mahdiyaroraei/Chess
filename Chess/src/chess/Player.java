@@ -10,5 +10,11 @@ package chess;
  * @author mahdiar
  */
 public class Player {
+    public Sarbaz[] sarbazHa = new Sarbaz[8];
+    public Fil[] fillHa = new Fil[2];
+    public Asb[] asbHa = new Asb[2];
+    public Shah shah = new Shah();
+    public Rokh[] rokhHa = new Rokh[2];
+    public Vazir vazir = new Vazir();
     
 }
